@@ -8,9 +8,9 @@ This project uses **Microsoft Visual C++ (MSVC)** inline assembly syntax, which 
 
 ## Installation Steps
 
-### Option A: Build Tools Only (Lightweight - ~2-3 GB, No IDE)
+### Build Tools for Visual Studio 2022 (Lightweight - ~2-3 GB, No IDE)
 
-**Recommended if you only want to compile from terminal:**
+**This is all you need to compile from terminal:**
 
 1. **Download Build Tools for Visual Studio 2022**
 
@@ -36,45 +36,13 @@ This project uses **Microsoft Visual C++ (MSVC)** inline assembly syntax, which 
    - Click "Install" (requires ~2-3 GB of disk space)
    - Wait for installation to complete (may take 10-15 minutes)
 
-### Option B: Full Visual Studio (If you want the IDE too - ~7-10 GB)
-
-1. **Download Visual Studio 2022 Community Edition** (Free)
-
-   - Visit: https://visualstudio.microsoft.com/downloads/
-   - Click on "Free download" under "Community 2022"
-
-2. **Run the Installer**
-
-   - Launch the downloaded `VisualStudioSetup.exe`
-
-3. **Select Workload**
-
-   - In the installer, check **"Desktop development with C++"**
-   - This will install:
-     - MSVC compiler (cl.exe)
-     - Windows SDK
-     - Visual Studio IDE
-     - CMake tools
-     - C++ core features
-
-4. **Install**
-   - Click "Install" (requires ~7-10 GB of disk space)
-   - Wait for installation to complete (may take 15-30 minutes)
-
-**Note:** You can use Option B and still compile from terminal without ever opening the IDE.
-
-**Note:** You can use Option B and still compile from terminal without ever opening the IDE.
-
 ## Verify Installation
 
-After installation, verify the compiler is available:
+After installation, verify the compiler is available by opening **"Developer Command Prompt for VS 2022"** or **"Developer PowerShell for VS 2022"**:
 
-1. **Open "Developer Command Prompt for VS 2022"** or **"Developer PowerShell for VS 2022"**
+1. Press `Windows Key` and search for "Developer Command Prompt" or "Developer PowerShell"
 
-   - Press `Windows Key` and search for "Developer Command Prompt" or "Developer PowerShell"
-   - These terminals come with either installation option
-
-2. **Test the compiler:**
+2. Test the compiler:
 
    ```cmd
    cl
@@ -104,16 +72,8 @@ After installation, verify the compiler is available:
 
 3. **Compile with one-liner command:**
 
-   For Build Tools installation:
-
    ```powershell
    cmd /c '"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
-   ```
-
-   Or for full Visual Studio installation:
-
-   ```powershell
-   cmd /c '"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
    ```
 
 4. **Run the benchmark:**
@@ -196,9 +156,7 @@ cl /EHsc /O2 /arch:IA32 main.cpp /Fe:benchmark.exe
 
 - **OS:** Windows 10 or Windows 11
 - **Architecture:** x86 or x64 CPU (code uses 32-bit assembly instructions)
-- **Disk Space:**
-  - Build Tools only: ~2-3 GB
-  - Full Visual Studio: ~7-10 GB
+- **Disk Space:** ~2-3 GB for Build Tools
 - **RAM:** 4 GB minimum (8 GB recommended)
 - **No IDE required** - Everything works from the terminal!
 
