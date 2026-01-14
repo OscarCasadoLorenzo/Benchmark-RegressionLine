@@ -90,30 +90,9 @@ After installation, verify the compiler is available:
 
 ### IMPORTANT: This code uses 32-bit x86 assembly and MUST be compiled for x86 (32-bit) architecture!
 
-### Method 1: Using Developer Command Prompt (Easiest)
+### Compilation Method: PowerShell One-Liner
 
-1. **Open "x86 Native Tools Command Prompt for VS 2022"** from Start Menu
-
-   - **NOT** the x64 version - must be x86!
-
-2. **Navigate to project directory:**
-
-   ```cmd
-   cd "C:\Users\oscar\Desktop\Github\Benchmark-RegressionLine"
-   ```
-
-3. **Compile:**
-
-   ```cmd
-   cl /EHsc /O2 main.cpp /Fe:benchmark.exe
-   ```
-
-4. **Run:**
-   ```cmd
-   benchmark.exe
-   ```
-
-### Method 2: Using Developer PowerShell (Recommended for PowerShell users)
+**CRITICAL: Use vcvars32.bat (NOT vcvars64.bat) because the code uses 32-bit assembly!**
 
 1. **Open your regular PowerShell**
 
@@ -123,7 +102,9 @@ After installation, verify the compiler is available:
    cd C:\Users\oscar\Desktop\Github\Benchmark-RegressionLine
    ```
 
-3. **Set up x86 (32-bit) environment and compile:**
+3. **Compile with one-liner command:**
+
+   For Build Tools installation:
 
    ```powershell
    cmd /c '"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
@@ -135,58 +116,11 @@ After installation, verify the compiler is available:
    cmd /c '"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
    ```
 
-4. **Run:**
+4. **Run the benchmark:**
 
    ```powershell
    .\benchmark.exe
    ```
-
-5. **Compile:**
-
-   ```powershell
-   cl /EHsc /O2 main.cpp /Fe:benchmark.exe
-   ```
-
-6. **Run:**
-   ```powershell
-   .\benchmark.exe
-   ```
-
-### Method 3: Using Your Regular Terminal (PowerShell/CMD)
-
-**CRITICAL: Use vcvars32.bat (NOT vcvars64.bat) because the code uses 32-bit assembly!**
-
-**For PowerShell:**
-
-```powershell
-# One-time setup per terminal session - USE vcvars32.bat for x86!
-cmd /c '"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
-
-# OR if you installed full Visual Studio:
-cmd /c '"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
-
-# Then run
-.\benchmark.exe
-```
-
-**For CMD:**
-
-```cmd
-REM One-time setup per terminal session - USE vcvars32.bat for x86!
-"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars32.bat"
-
-REM OR if you installed full Visual Studio:
-"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
-
-REM Navigate to project
-cd C:\Users\oscar\Desktop\Github\Benchmark-RegressionLine
-
-REM Compile
-cl /EHsc /O2 main.cpp /Fe:benchmark.exe
-
-REM Run
-benchmark.exe
-```
 
 ## Compilation Flags Explained
 
@@ -201,11 +135,15 @@ benchmark.exe
 
 **Cause:** The compiler environment variables are not set.
 
-**Solutions:**
+**Solution:**
 
-1. Use "x86 Native Tools Command Prompt for VS 2022" from Start Menu (easiest)
-2. OR run the vcvars32.bat script in your current terminal (see Method 3 above)
-3. **Important:** Make sure you're using vcvars**32**.bat, not vcvars64.bat!
+Make sure you're using the complete one-liner command that includes the vcvars32.bat setup:
+
+```powershell
+cmd /c '"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
+```
+
+**Important:** Make sure you're using vcvars**32**.bat, not vcvars64.bat!
 
 ### Error: "\_\_asm keyword not supported on this architecture" or "illegal number of operands"
 
@@ -213,8 +151,7 @@ benchmark.exe
 
 **Solution:**
 
-- Use vcvars**32**.bat instead of vcvars**64**.bat
-- OR open "**x86** Native Tools Command Prompt" (not x64)
+- Use vcvars**32**.bat instead of vcvars**64**.bat in the compilation command
 - The inline assembly in this code only works with 32-bit (x86) compilation
 
 ### Error: "Cannot open include file"
@@ -270,15 +207,15 @@ cl /EHsc /O2 /arch:IA32 main.cpp /Fe:benchmark.exe
 **For terminal-only users (no IDE):**
 
 1. Install Build Tools for Visual Studio 2022 (2-3 GB)
-2. Open "Developer Command Prompt for VS 2022"
+2. Open your regular PowerShell
 3. Run:
-   ```cmd
+   ```powershell
    cd C:\Users\oscar\Desktop\Github\Benchmark-RegressionLine
-   cl /EHsc /O2 main.cpp /Fe:benchmark.exe
-   benchmark.exe
+   cmd /c '"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars32.bat" && cl /EHsc /O2 main.cpp /Fe:benchmark.exe'
+   .\benchmark.exe
    ```
 
-**That's it! No Visual Studio IDE needed.**
+**That's it! No Visual Studio IDE or special terminals needed.**
 
 ## Notes
 
