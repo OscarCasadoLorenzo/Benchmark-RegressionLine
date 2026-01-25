@@ -195,7 +195,7 @@ Compile with **Microsoft Visual Studio** (C++ project with inline assembly enabl
 Run the compiled executable:
 
 ```bash
-.\benchmark.exe 2000
+.\benchmark.exe
 ```
 
 The program will:
